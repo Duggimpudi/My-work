@@ -1,0 +1,30 @@
+--Number of people with the history of mental health by gender and country
+SELECT Gender, Country, COUNT(Mental_Health_History) As [No.of People]
+FROM [Health].[dbo].[Mental Health Dataset]
+WHERE mental_health_history = 'Yes'
+GROUP BY Gender, Country;
+
+--Number of people with High mood swings and Mental_health_history but are not under treatment
+SELECT Country, Mood_Swings, Mental_Health_History,treatment, COUNT(*) As [No.of People]
+FROM [Health].[dbo].[Mental Health Dataset]
+Where Mood_Swings = 'High' and Mental_Health_History = 'yes' and treatment = 'No'
+GROUP BY Country, Mood_Swings, Mental_Health_History,treatment
+
+--Number of people with social_weekness and their number of days indoors
+SELECT Days_Indoors, COUNT(Social_Weakness) As [No.of People with Social Weakness]
+FROM [Health].[dbo].[Mental Health Dataset]
+Where Social_Weakness = 'YES'
+GROUP BY Days_Indoors
+Order by [No.of People with Social Weakness] DESC
+
+ --Which occupation people have growing stress
+Select Occupation, COUNT(Growing_Stress) As [No.of People]
+FROM [Health].[dbo].[Mental Health Dataset]
+Where Growing_Stress = 'Yes'
+Group By Occupation
+Order By [No.of People] desc
+
+--Number of people with growing stress by year
+SELECT Year(Timestamp) AS [Year], COUNT(Growing_Stress) As [No.of People]
+FROM [Health].[dbo].[Mental Health Dataset]
+Group By Year(Timestamp)
